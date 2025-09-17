@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-bold text-gray-700">Manage Timetables</h1>
+  <a href="{% url 'add_timetable' %}" class="flex items-center space-x-2 bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded-lg shadow transition">
+    <i data-feather="calendar"></i>
+    <span>Add Timetable</span>
+  </a>
+</div>
+
+<div class="overflow-x-auto bg-white shadow-md rounded-lg">
+  <table class="w-full text-left border-collapse">
+    <thead class="bg-[#0A1D37] text-white">
+      <tr>
+        <th class="p-3">Id</th>
+        <th class="p-3">Class</th>
+        <th class="p-3">Subject</th>
+        <th class="p-3">Teacher</th>
+        <th class="p-3">Day</th>
+        <th class="p-3">Time</th>
+        <th class="p-3 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tt in timetables %}
+      <tr class="border-b hover:bg-gray-100">
+        <td class="p-3">{{ tt.id }}</td>
+        <td class="p-3">{{ tt.student_class }}</td>
+        <td class="p-3">{{ tt.subject.name }}</td>
+        <td class="p-3">{{ tt.teacher.user.get_full_name }}</td>
+        <td class="p-3">{{ tt.day }}</td>
+        <td class="p-3">{{ tt.start_time }} - {{ tt.end_time }}</td>
+        <td class="p-3 flex gap-2 justify-center">
+          <a href="{% url 'edit_timetable' tt.id %}" class="flex items-center bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-500 text-xs font-medium">
+            <i data-feather="edit-2" class="w-4 h-4 mr-1"></i> Edit
+          </a>
+          <a href="{% url 'delete_timetable' tt.id %}" onclick="return confirm('Are you sure you want to delete this timetable?');" class="flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-xs font-medium">
+            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6" class="p-3 text-center text-gray-500">No timetable entries found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

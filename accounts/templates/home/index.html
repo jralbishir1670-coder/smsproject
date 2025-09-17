@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+ {% load static %} 
+{% block content %}
+
+
+<!-- Hero -->
+<section class="bg-gradient-to-r from-indigo-900 to-amber-500 text-white py-20">
+  <div class="container mx-auto flex flex-col md:flex-row items-center px-6">
+    <div class="md:w-1/2">
+      <h2 class="text-4xl font-bold mb-4">
+        Welcome to SchoolMS – Smart School Management
+      </h2>
+      <p class="mb-6">
+        Simplify school administration with automation, attendance, grading, and
+        communication tools.
+      </p>
+      <a
+        href="#"
+        onclick="openModal('signupModal')"
+        class="bg-white text-indigo-800 px-6 py-3 rounded-lg shadow hover:bg-gray-100"
+        >Get Started</a
+      >
+    </div>
+    <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+      <img src="{% static 'images/hero.png' %}" alt="Students" class="w-80" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOGIN MODAL ================= -->
+<div
+  id="loginModal"
+  class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50"
+>
+  <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+    <!-- Close Button -->
+    <button
+      onclick="closeModal('loginModal')"
+      class="absolute top-3 right-3 text-gray-500 hover:text-indigo-800"
+    >
+      ✖
+    </button>
+
+    <!-- Logo -->
+    <h1 class="text-3xl font-bold text-center text-indigo-800 mb-6">
+      School<span class="text-amber-500">MS</span>
+    </h1>
+    <h2 class="text-xl font-semibold text-center mb-6">
+      Login to Your Account
+    </h2>
+
+    <!-- Form -->
+    <form action="#" method="POST" class="space-y-4">
+      <div>
+        <label for="email" class="block text-gray-700 font-medium mb-1"
+          >Email</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-800 focus:outline-none"
+          required
+        />
+      </div>
+      <div>
+        <label for="password" class="block text-gray-700 font-medium mb-1"
+          >Password</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-800 focus:outline-none"
+          required
+        />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-2 text-indigo-800" />
+          <span class="text-sm text-gray-600">Remember Me</span>
+        </label>
+        <a href="#" class="text-sm text-indigo-800 hover:text-amber-500"
+          >Forgot Password?</a
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-indigo-800 text-white py-2 rounded-lg font-semibold hover:bg-amber-500 hover:text-indigo-900 transition"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="my-6 flex items-center">
+      <div class="flex-grow h-px bg-gray-300"></div>
+      <span class="px-4 text-gray-500">OR</span>
+      <div class="flex-grow h-px bg-gray-300"></div>
+    </div>
+
+    <!-- Social Login -->
+    <div class="flex space-x-4">
+      <button
+        class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Login with Facebook
+      </button>
+      <button
+        class="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+      >
+        Login with Google
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SIGNUP MODAL ================= -->
+ 
+<!-- Example About Section -->
+<section
+  id="about"
+  class="py-16 container mx-auto px-6 flex flex-col md:flex-row items-center"
+>
+  <div class="md:w-1/2 mb-8 md:mb-0">
+    <img src="https://img.icons8.com/color/500/classroom.png" alt="Classroom" />
+  </div>
+  <div class="md:w-1/2 md:pl-12">
+    <h3 class="text-3xl font-bold mb-4 text-indigo-800">About SchoolMS</h3>
+    <p class="mb-6">
+      SchoolMS is a modern school management platform designed to automate
+      student management, teacher management, attendance tracking, grading, and
+      seamless communication between parents and staff.
+    </p>
+    <a
+      href="#"
+      class="bg-amber-500 text-white px-6 py-3 rounded-lg shadow hover:bg-amber-600"
+      >Learn More</a
+    >
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="bg-gray-100 py-16">
+  <div class="container mx-auto text-center px-6">
+    <h3 class="text-3xl font-bold mb-12 text-indigo-800">Features</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="p-6 bg-white rounded-lg shadow">
+        <i class="bx bxs-user-detail text-5xl text-indigo-800"></i>
+        <h4 class="text-xl font-bold mt-4 mb-2">Student Management</h4>
+        <p>Manage student records, profiles, and progress reports.</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow">
+        <i class="bx bxs-chalkboard text-5xl text-indigo-800"></i>
+        <h4 class="text-xl font-bold mt-4 mb-2">Teacher Management</h4>
+        <p>Handle teacher records, subjects, and performance tracking.</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow">
+        <i class="bx bxs-book-open text-5xl text-indigo-800"></i>
+        <h4 class="text-xl font-bold mt-4 mb-2">Attendance & Exams</h4>
+        <p>Track daily attendance and conduct exam grading seamlessly.</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow">
+        <i class="bx bxs-message-dots text-5xl text-indigo-800"></i>
+        <h4 class="text-xl font-bold mt-4 mb-2">Communication & Reports</h4>
+        <p>Send announcements and generate automated reports.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-indigo-800 text-white py-16 px-6">
+  <div
+    class="container mx-auto flex flex-col md:flex-row items-center justify-between"
+  >
+    <div class="md:w-2/3 mb-6 md:mb-0">
+      <h3 class="text-3xl font-bold mb-2">
+        Empower Your School With Smart Management
+      </h3>
+      <p>Transform the way your school operates with digital tools.</p>
+    </div>
+    <a
+      href="#"
+      onclick="openModal('signupModal')"
+      class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-lg shadow"
+      >Get Demo</a
+    >
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-16 container mx-auto px-6">
+  <h3 class="text-3xl font-bold text-center mb-12 text-indigo-800">
+    Contact Us
+  </h3>
+  <div class="grid md:grid-cols-2 gap-12">
+    <div>
+      <p class="mb-2">
+        <i class="bx bxl-whatsapp text-green-500"></i> WhatsApp: +234 800 000
+        0000
+      </p>
+      <p class="mb-2">
+        <i class="bx bx-envelope text-indigo-800"></i> Email: info@schoolms.com
+      </p>
+      <p>
+        <i class="bx bx-map text-indigo-800"></i> Address: 123 Education St,
+        City
+      </p>
+    </div>
+    <form class="space-y-4">
+      <input type="text" placeholder="Name" class="w-full p-3 border rounded" />
+      <input
+        type="email"
+        placeholder="Email"
+        class="w-full p-3 border rounded"
+      />
+      <input
+        type="text"
+        placeholder="Subject"
+        class="w-full p-3 border rounded"
+      />
+      <textarea
+        placeholder="Message"
+        class="w-full p-3 border rounded h-32"
+      ></textarea>
+      <button
+        class="bg-indigo-800 w-full text-white px-6 py-3 rounded hover:bg-indigo-900"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

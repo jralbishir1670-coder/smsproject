@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Student Profile - SchoolMS{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-indigo-800 text-white">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <a href="{% url 'student_dashboard' %}">
+        <h1 class="text-2xl font-bold">School<span class="text-amber-500">MS</span></h1>
+      </a>
+      <nav class="space-x-6">
+        <a href="{% url 'student_dashboard' %}" class="hover:text-amber-400">Dashboard</a>
+        <a href="{% url 'student_timetable' %}" class="hover:text-amber-400">View timetable</a>
+        <a href="{% url 'logout' %}" class="hover:text-amber-400">Logout</a>
+      </nav>
+    </div>
+  </header>
+  {% block content %} {% endblock %}
+
+  <!-- Footer -->
+  {% comment %} <footer class="bg-indigo-800 text-white text-center p-4 mt-8">
+    <p>&copy; 2025 SchoolMS by Usman Albishir. All rights reserved.</p>
+  </footer> {% endcomment %}
+
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

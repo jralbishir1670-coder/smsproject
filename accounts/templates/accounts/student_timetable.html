@@ -1,0 +1,41 @@
+{% extends 'profile_base.html' %}
+{% block title %}Student Timetable | SchoolMS{% endblock %}
+
+{% block content %}
+<main class="flex-1 p-6 overflow-y-auto">
+  <section class="container mx-auto mt-6 p-6 rounded-lg ">
+     
+  <h1 class="text-2xl font-bold text-gray-700">My Timetable</h1>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    {% if timetable %}
+     <table class="w-full text-left border-collapse">
+    <thead class="bg-[#0A1D37] text-white">
+      <tr>
+        <th class="p-3">Day</th>
+        <th class="p-3">Subject</th>
+        <th class="p-3">Teacher</th>
+        <th class="p-3">Start Time</th>
+        <th class="p-3">End Time</th>
+       
+      </tr>
+    </thead>
+    
+        <tbody>
+          {% for entry in timetable %}
+          <tr class="border-b hover:bg-gray-100">
+            <td class="p-3">{{ entry.day }}</td>
+            <td class="p-3">{{ entry.subject.name }}</td>
+            <td class="p-3">{{ entry.teacher }}</td>
+            <td class="p-3">{{ entry.start_time }}</td>
+            <td class="p-3">{{ entry.end_time }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No timetable assigned.</p>
+    {% endif %}
+
+  </section>
+</main>
+{% endblock %}

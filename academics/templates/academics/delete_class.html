@@ -1,0 +1,25 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-red-600">Delete Class</h2>
+
+  <p class="mb-4">
+    Are you sure you want to delete 
+    <strong>{{ student_class.name }} - {{ student_class.section }}</strong>?
+  </p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="flex space-x-4">
+      <button type="submit" class="w-1/2 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg">
+        Yes, Delete
+      </button>
+      <a href="{% url 'manage_classes' %}" class="w-1/2 text-center bg-gray-300 hover:bg-gray-400 py-2 rounded-lg">
+        Cancel
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}

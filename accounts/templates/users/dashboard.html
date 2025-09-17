@@ -1,0 +1,125 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Profile Header -->
+{% block profile_header %}
+<section class="bg-white shadow-md rounded-lg p-6 container mx-auto mt-6 flex items-center space-x-6">
+  
+  <!-- First Div: Profile Image + Details -->
+  <div class="flex items-center space-x-6">
+    {% if request.user.profile_image %}
+      <img src="{{ request.user.profile_image.url }}" 
+           alt="{{ request.user.username }}" 
+           class="w-28 h-28 rounded-full border-4 border-indigo-800">
+    {% else %}
+      <img src="{% static 'images/default-avatar.png' %}" 
+           alt="Default Avatar" 
+           class="w-28 h-28 rounded-full border-4 border-indigo-800">
+    {% endif %}
+
+    <div>
+      <h2 class="text-1xl font-bold text-indigo-800">
+        Username: <span class="text-amber-500">{{ request.user.username }}</span>
+      </h2>
+      <p class="text-1xl font-bold text-indigo-800">
+        Email: <span class="text-amber-500">{{ request.user.email }}</span>
+      </p>
+      <p class="text-1xl font-bold text-indigo-800">
+        Contact: <span class="text-amber-500">{{ request.user.contact }}</span>
+      </p>
+      <p class="text-1xl font-bold text-indigo-800">
+        Gender: <span class="text-amber-500">{{ request.user.gender }}</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Second Div: Social Media Links -->
+  <div class="flex space-x-3 mt-2">
+    <a href="#" class="text-indigo-800 hover:text-amber-500">
+      <i data-feather="facebook"></i>
+    </a>
+    <a href="#" class="text-indigo-800 hover:text-amber-500">
+      <i data-feather="twitter"></i>
+    </a>
+    <a href="#" class="text-indigo-800 hover:text-amber-500">
+      <i data-feather="linkedin"></i>
+    </a>
+  </div>
+</section>
+
+{% endblock profile_header %}
+
+
+<!-- Stats Section -->
+{% block stats %}
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6 my-6">
+  <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-3">
+    <i data-feather="users" class="text-indigo-800"></i>
+    <div>
+      <p class="text-gray-500 text-[20px] font-semibold">Students</p>
+      <h2 class="text-2xl font-bold text-amber-500">{{ student_count }}+</h2>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-3">
+    <i data-feather="user" class="text-indigo-800"></i>
+    <div>
+      <p class="text-gray-500 text-[20px] font-semibold">Teachers</p>
+      <h2 class="text-2xl font-bold text-amber-500">{{ teacher_count }}+</h2>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-3">
+    <i data-feather="book" class="text-indigo-800"></i>
+    <div>
+      <p class="text-gray-500 text-[20px] font-semibold">Classes</p>
+      <h2 class="text-2xl font-bold text-amber-500">{{ class_count }}+</h2>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-3">
+    <i data-feather="book" class="text-indigo-800"></i>
+    <div>
+      <p class="text-gray-500 text-[20px] font-semibold">Subjects</p>
+      <h2 class="text-2xl font-bold text-amber-500">{{ subject_count }}+</h2>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-3">
+    <i data-feather="check-circle" class="text-indigo-800"></i>
+    <div>
+      <p class="text-gray-500 text-[20px] font-semibold">Attendance</p>
+      <h2 class="text-2xl font-bold text-amber-500">{{ attendance_count }}+</h2>
+    </div>
+  </div>
+</div>
+{% endblock stats %}
+
+
+<!-- Recent Activities -->
+{% block activities %}
+<div class="bg-white p-6 rounded-lg shadow">
+  <h3 class="text-lg font-semibold text-indigo-800 mb-4">Recent Activities</h3>
+  <ul class="space-y-4">
+    {% for activity in recent_activities %}
+      <li class="flex items-start space-x-3">
+        <div class="flex-shrink-0">
+          <i data-feather="{{ activity.icon }}" class="{{ activity.color }}"></i>
+        </div>
+        <div>
+          <p class="text-gray-700">{{ activity.message }}</p>
+          <p class="text-xs text-gray-400">
+            {{ activity.timestamp|date:"M d, Y - H:i A" }}
+          </p>
+        </div>
+      </li>
+    {% empty %}
+      <li class="text-gray-400">No recent activities.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock activities %}
+
+{% endblock content %}

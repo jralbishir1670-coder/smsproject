@@ -1,0 +1,73 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Attendance Report</h2>
+
+  <!-- Filter Form -->
+  <form method="get" class="flex flex-wrap gap-4 mb-6">
+    <select name="class_id" class="border rounded-lg px-3 py-2">
+      <option value="">-- Select Class --</option>
+      {% for cls in classes %}
+      <option value="{{ cls.id }}" {% if selected_class == cls.id %}selected{% endif %}>
+        {{ cls.name }} - {{ cls.section }}
+      </option>
+      {% endfor %}
+    </select>
+
+    <input
+      type="date"
+      name="start_date"
+      value="{{ start_date }}"
+      class="border rounded-lg px-3 py-2"
+    />
+    <input
+      type="date"
+      name="end_date"
+      value="{{ end_date }}"
+      class="border rounded-lg px-3 py-2"
+    />
+
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+      Filter
+    </button>
+  </form>
+
+  <!-- Report Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-white shadow-sm">
+      <thead>
+        <tr class="bg-indigo-600 text-white">
+          <th class="p-3 text-left">Student</th>
+          <th class="p-3 text-center">Total</th>
+          <th class="p-3 text-center">Present</th>
+          <th class="p-3 text-center">Absent</th>
+          <th class="p-3 text-center">Attendance %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in report %}
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ row.student__full_name }}</td>
+          <td class="p-3 text-center">{{ row.total }}</td>
+          <td class="p-3 text-center text-green-600 font-semibold">{{ row.present }}</td>
+          <td class="p-3 text-center text-red-600 font-semibold">{{ row.absent }}</td>
+          <td class="p-3 text-center font-bold">
+            {% if row.total > 0 %}
+              {{ row.present|floatformat:2|divisibleby:row.total }}
+            {% else %}
+              0%
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="p-4 text-center text-gray-500">No attendance data found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

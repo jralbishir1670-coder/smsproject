@@ -1,0 +1,26 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-6 bg-white p-8 rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+    Edit Class ({{ student_class.name }} - {{ student_class.section }})
+  </h2>
+
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+  <div class="flex justify-between items-center mt-6">
+       <a href="{% url 'manage_students' %}" class="inline-block px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition duration-200">
+        ← Back
+      </a>
+      <button type="submit" 
+              class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+        Save Subject
+      </button>
+    </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

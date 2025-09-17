@@ -1,0 +1,39 @@
+_{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="max-w-2xl mx-auto  bg-white py-6 px-4 rounded-xl shadow-lg">
+  <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">
+    Edit Student
+  </h2>
+  <form
+    method="POST"
+    action="{% url 'edit_student' student.id %}"
+    enctype="multipart/form-data"
+    class="space-y-4"
+  >
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <!-- Show current photo if available -->
+    {% if student.profile_imagephot %}
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold">Current Photo</label>
+      <img src="{{ student.profile_image.url }}" alt="{{ student.name }}" class="w-24 h-24 rounded-full object-cover mt-2">
+    </div>
+    {% endif %}
+
+     <div class="flex items-center justify-between pt-4">
+       <a href="{% url 'manage_students' %}" class="inline-block px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition duration-200">
+        ← Back
+      </a>
+     
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-200"
+      >
+        Update Student
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
