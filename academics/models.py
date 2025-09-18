@@ -2,6 +2,10 @@ from django.db import models
 
 # Create your models here.
 class Subject(models.Model):
+    class Meta:
+        permissions = [
+            ("manage_subject", "Can manage subject"),
+        ]
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=20, unique=True)
 
@@ -20,6 +24,8 @@ class StudentClass(models.Model):
 
 
 class Timetable(models.Model):
+    class Meta:
+        pass
     DAYS_OF_WEEK = (
         ('Monday', 'Monday'),
         ('Tuesday', 'Tuesday'),

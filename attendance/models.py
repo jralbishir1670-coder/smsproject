@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Attendance(models.Model):
+    class Meta:
+        permissions = [
+            ("manage_attendance", "Can manage attendance"),
+        ]
+    
     STATUS_CHOICES = (
         ('present', 'Present'),
         ('absent', 'Absent'),
