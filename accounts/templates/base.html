@@ -13,8 +13,8 @@
     />
     <script src="https://unpkg.com/feather-icons"></script>
 
-  </head>
-  <body class="font-sans text-gray-800">
+</head>
+<body class="font-sans text-gray-800">
 
     <!-- Navbar -->
 <header class="bg-white shadow-md sticky top-0 z-50">
@@ -36,9 +36,7 @@
       <a href="#home" class="hover:text-indigo-800">Home</a>
       <a href="#about" class="hover:text-indigo-800">About</a>
       <a href="#features" class="hover:text-indigo-800">Features</a>
-      <a href="" class="hover:text-indigo-800"
-        >Dashboard</a
-      >
+      {% comment %} <a href="" class="hover:text-indigo-800">Dashboard</a> {% endcomment %}
       <a href="#contact" class="hover:text-indigo-800">Contact</a>
       <a href="{% url 'login' %}"
         class="bg-indigo-800 hover:bg-indigo-900 text-white px-4 py-2 rounded-lg shadow-md"
@@ -73,7 +71,7 @@
       <a href="#home" class="hover:text-indigo-800">Home</a>
       <a href="#about" class="hover:text-indigo-800">About</a>
       <a href="#features" class="hover:text-indigo-800">Features</a>
-      <a href="#" class="hover:text-indigo-800">Dashboard</a>
+      {% comment %} <a href="#" class="hover:text-indigo-800">Dashboard</a> {% endcomment %}
       <a href="#contact" class="hover:text-indigo-800">Contact</a>
       <a href="{% url 'login' %}"
         class="bg-indigo-800 hover:bg-indigo-900 text-white px-4 py-2 rounded-lg shadow-md"
@@ -105,5 +103,34 @@
 
     <!-- ================= JAVASCRIPT ================= -->
    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+      (function () {
+        emailjs.init("UEwG4jSXgJOjd14un"); // replace with your public key from EmailJS
+      })();
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contact-form");
+
+        if (form) {
+          form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            emailjs.sendForm("service_1tcv6fj", "template_ghrcm5n", form).then(
+              () => {
+                alert("Message sent successfully ✅");
+              },
+              (error) => {
+                console.error("Failed to send message ❌", error);
+                alert("Oops! Something went wrong.");
+              }
+            );
+          });
+        }
+      });
+
+    </script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   </body>
 </html> 

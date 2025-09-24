@@ -39,7 +39,7 @@
           <a href="{% url 'index' %}" class="hover:text-indigo-800">Home</a>
           <a href="#about" class="hover:text-indigo-800">About</a>
           <a href="#features" class="hover:text-indigo-800">Features</a>
-          <a href="#" class="hover:text-indigo-800">Dashboard</a>
+          {% comment %} <a href="#" class="hover:text-indigo-800">Dashboard</a> {% endcomment %}
           <a href="#contact" class="hover:text-indigo-800">Contact</a>
           <a
             href="{% url 'login' %}"
@@ -75,9 +75,9 @@
       <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
         <nav class="flex flex-col space-y-4 px-6 py-4">
           <a href="#home" class="hover:text-indigo-800">Home</a>
-          <a href="#about" class="hover:text-indigo-800">About</a>
-          <a href="#features" class="hover:text-indigo-800">Features</a>
-          <a href="#" class="hover:text-indigo-800">Dashboard</a>
+          {% comment %} <a href="#about" class="hover:text-indigo-800">About</a>
+          <a href="#features" class="hover:text-indigo-800">Features</a> {% endcomment %}
+          {% comment %} <a href="#" class="hover:text-indigo-800">Dashboard</a> {% endcomment %}
           <a href="#contact" class="hover:text-indigo-800">Contact</a>
           <a
             href="{% url 'login' %}"

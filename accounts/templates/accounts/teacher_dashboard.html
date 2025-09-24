@@ -1,59 +1,17 @@
-{% extends 'profile_base.html' %}
+{% extends 'teacher_profile_base.html' %}
 {% block title %}Teacher Dashboard | SchoolMS{% endblock %}
 
 {% block content %}
-<div class="bg-white p-6 rounded-lg shadow-md mb-6">
-  <h2 class="text-2xl font-bold text-indigo-800">Welcome, {{ user.username }}</h2>
-  <p class="text-gray-500">Here is an overview of your classes and attendance records.</p>
-</div>
-
-<!-- Assigned Classes -->
-<div class="bg-white p-6 rounded-lg shadow-md mb-6">
-  <h3 class="text-lg font-semibold text-indigo-800 mb-4">Assigned Classes</h3>
-  <ul class="space-y-3">
-    {% for cls in classes %}
-    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-      <span class="font-medium">{{ cls.name }} - {{ cls.section }}</span>
-      <a href="#" class="text-blue-600 hover:underline">View Details</a>
-    </li>
-    {% empty %}
-    <li class="text-gray-400">No classes assigned yet.</li>
-    {% endfor %}
-  </ul>
-</div>
-
-<!-- Attendance Records -->
-<div class="bg-white p-6 rounded-lg shadow-md">
-  <h3 class="text-lg font-semibold text-indigo-800 mb-4">Recent Attendance</h3>
-  <div class="overflow-x-auto">
-    <table class="w-full border-collapse">
-      <thead>
-        <tr class="bg-indigo-600 text-white">
-          <th class="p-3 text-left">Date</th>
-          <th class="p-3 text-left">Class</th>
-          <th class="p-3 text-left">Student</th>
-          <th class="p-3 text-center">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for record in attendance_records|slice:":10" %}
-        <tr class="border-b hover:bg-gray-50">
-          <td class="p-3">{{ record.date }}</td>
-          <td class="p-3">{{ record.student_class }}</td>
-          <td class="p-3">{{ record.student.full_name }}</td>
-          <td class="p-3 text-center">
-            {% if record.status == "present" %}
-              <span class="text-green-600 font-semibold">Present</span>
-            {% else %}
-              <span class="text-red-600 font-semibold">Absent</span>
-            {% endif %}
-          </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4" class="p-3 text-center text-gray-500">No attendance records found.</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+<main class="flex-1 p-6 overflow-y-auto">
+  <section class="container mx-auto mt-6 bg-white p-6 rounded-lg shadow-md flex items-center space-x-6">
+    <img src="{{ teacher.profile_image.url }}" alt="Teacher Photo" class="w-24 h-24 rounded-full border-4 border-indigo-800">
+    <div>
+      <h2 class="text-2xl font-bold text-indigo-800 mb-2">Welcome, {{ teacher.user.get_full_name|default:teacher.user.username }}</h2>
+      <p class="text-gray-600 mb-1">Username: <span class="font-semibold">{{ teacher.user.username }}</span></p>
+      <p class="text-gray-600 mb-1">Email: <span class="font-semibold">{{ teacher.user.email }}</span></p>
+      <p class="text-gray-600">Staff ID: <span class="font-semibold">{{ teacher.staff_id|default:'N/A' }}</span></p>
+    </div>
+  </section>
+  
+</main>
 {% endblock %}

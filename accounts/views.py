@@ -98,32 +98,62 @@ def staff_dashboard(request):
 
 @login_required
 def teacher_dashboard(request):
-    return render(request, "accounts/teacher_dashboard.html")
+    user = request.user
+    teacher = getattr(user, 'teacher_profile', None)
+    classes = []
+    if teacher:
+        classes = StudentClass.objects.filter(teacher=teacher)
+    # For attendance marking, students will be loaded by class selection in the template
+    return render(request, "accounts/teacher_dashboard.html", {"teacher": teacher, "classes": classes})
+
+
+@login_required
+def teacher_classes(request):
+    user = request.user
+    teacher = getattr(user, 'teacher_profile', None)
+    classes = []
+    if teacher:
+        classes = StudentClass.objects.filter(teacher=teacher)
+    return render(request, "accounts/teacher_classes.html", {"teacher": teacher, "classes": classes})
+
+@login_required
+def teacher_attendance(request):
+    # This would be a dedicated attendance marking page if needed
+    return redirect('teacher_dashboard')
+
+@login_required
+def teacher_timetable(request):
+    user = request.user
+    teacher = getattr(user, 'teacher_profile', None)
+    timetable = []
+    if teacher:
+        timetable = Timetable.objects.filter(teacher=teacher).select_related('student_class', 'subject').order_by('day', 'start_time')
+    return render(request, "accounts/teacher_timetable.html", {"teacher": teacher, "timetable": timetable})
 
 @login_required
 def student_dashboard(request):
     user = request.user
     student = getattr(user, 'student_profile', None)
-    present_days = absent_days = attendance_percent = 0
-    if student:
-        present_days = student.attendances.filter(status='present').count()
-        absent_days = student.attendances.filter(status='absent').count()
-        total_days = present_days + absent_days
-        attendance_percent = int((present_days / total_days) * 100) if total_days > 0 else 0
-    # Placeholder for activities (no model found)
-    activities = [
-        "Member, Science Club",
-        "Captain, Debate Team",
-        "Volunteer, Environmental Awareness Program"
-    ]
-    context = {
-        'student': student,
-        'present_days': present_days,
-        'absent_days': absent_days,
-        'attendance_percent': attendance_percent,
-        'activities': activities,
-    }
-    return render(request, "accounts/student_dashboard.html", context)
+    # present_days = absent_days = attendance_percent = 0
+    # if student:
+    #     present_days = student.attendances.filter(status='present').count()
+    #     absent_days = student.attendances.filter(status='absent').count()
+    #     total_days = present_days + absent_days
+    #     attendance_percent = int((present_days / total_days) * 100) if total_days > 0 else 0
+    # # Placeholder for activities (no model found)
+    # activities = [
+    #     "Member, Science Club",
+    #     "Captain, Debate Team",
+    #     "Volunteer, Environmental Awareness Program"
+    # ]
+    # context = {
+       
+    #     'present_days': present_days,
+    #     'absent_days': absent_days,
+    #     'attendance_percent': attendance_percent,
+    #     'activities': activities,
+    # }
+    return render(request, "accounts/student_dashboard.html", { 'student': student})
 
 @login_required
 def student_timetable(request):
