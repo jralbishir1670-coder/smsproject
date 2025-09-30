@@ -6,6 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SchoolMS - Smart School Management</title>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> {% endcomment %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -104,7 +108,7 @@
     <!-- ================= JAVASCRIPT ================= -->
    <script src="{% static 'js/script.js' %}"></script>
     <script>
-      (function () {
+      {% comment %} (function () {
         emailjs.init("UEwG4jSXgJOjd14un"); // replace with your public key from EmailJS
       })();
       document.addEventListener("DOMContentLoaded", function () {
@@ -125,12 +129,12 @@
             );
           });
         }
-      });
+      }); {% endcomment %}
 
     </script>
 
     
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
 
   </body>
 </html> 

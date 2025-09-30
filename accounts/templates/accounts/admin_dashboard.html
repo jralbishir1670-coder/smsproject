@@ -9,7 +9,7 @@
   
   <!-- First Div: Profile Image + Details -->
   <div class="flex items-center space-x-6">
-    {% if request.user.profile_image %}
+    {% comment %} {% if request.user.profile_image %}
       <img src="{{ request.user.profile_image.url }}" 
            alt="{{ request.user.username }}" 
            class="w-28 h-28 rounded-full border-4 border-indigo-800">
@@ -17,7 +17,7 @@
       <img src="{% static 'images/default-avatar.png' %}" 
            alt="Default Avatar" 
            class="w-28 h-28 rounded-full border-4 border-indigo-800">
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     <div>
       <h2 class="text-1xl font-bold text-indigo-800">
@@ -26,17 +26,17 @@
       <p class="text-1xl font-bold text-indigo-800">
         Email: <span class="text-amber-500">{{ request.user.email }}</span>
       </p>
-      <p class="text-1xl font-bold text-indigo-800">
+      {% comment %} <p class="text-1xl font-bold text-indigo-800">
         Contact: <span class="text-amber-500">{{ request.user.contact }}</span>
       </p>
       <p class="text-1xl font-bold text-indigo-800">
         Gender: <span class="text-amber-500">{{ request.user.gender }}</span>
-      </p>
+      </p> {% endcomment %}
     </div>
   </div>
 
   <!-- Second Div: Social Media Links -->
-  <div class="flex space-x-3 mt-2">
+  {% comment %} <div class="flex space-x-3 mt-2">
     <a href="#" class="text-indigo-800 hover:text-amber-500">
       <i data-feather="facebook"></i>
     </a>
@@ -46,7 +46,7 @@
     <a href="#" class="text-indigo-800 hover:text-amber-500">
       <i data-feather="linkedin"></i>
     </a>
-  </div>
+  </div> {% endcomment %}
 </section>
 
 {% endblock profile_header %}
